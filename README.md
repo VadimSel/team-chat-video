@@ -1,6 +1,6 @@
 ## Технологии
 
-- NextJS (Parallel Routes, Group Routes, Server Actions, API)
+- NextJS
 - TypeScript
 - TailwindCSS + ShadCN
 - Prisma + PostgreSQL
