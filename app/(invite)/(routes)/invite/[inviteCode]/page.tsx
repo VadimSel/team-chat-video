@@ -45,7 +45,7 @@ const inviteCodePage = async ({params}: inviteCodePageProps) => {
       members: {
         create: [
           {
-            profileId: profile.id
+            profileId: profile.id,
           }
         ]
       }
