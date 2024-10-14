@@ -1,6 +1,8 @@
-import { auth } from "@clerk/nextjs/server"
+import { auth } from "@clerk/nextjs"
 
 import { db } from "@/lib/db"
+
+// Запрос профиля, что пользователь делающий какие либо операции именно тот пользователь, который должен быть
 
 export const currentProfile = async () => {
   const {userId} = auth()

@@ -21,7 +21,7 @@ import {
 import { useModal } from "@/hooks/use-modal-store";
 
 interface ServerHeaderProps {
-	server: ServerWithMembersWithProfiles;
+	server: ServerWithMembersWithProfiles; // Если прописать Server напрямую из призмы, то будут ошибки при попытке дотянутся до чего либо через точку
 	role?: MemberRole;
 }
 
@@ -57,7 +57,10 @@ export const ServerHeader = ({ server, role }: ServerHeaderProps) => {
 					</DropdownMenuItem>
 				)}
 				{isAdmin && (
-					<DropdownMenuItem className="px-3 py-2 text-sm cursor-pointer">
+					<DropdownMenuItem
+						onClick={() => onOpen("editServer", { server })}
+						className="px-3 py-2 text-sm cursor-pointer"
+					>
 						Server Settings
 						<Settings className="h-4 w-4 ml-auto" />
 					</DropdownMenuItem>

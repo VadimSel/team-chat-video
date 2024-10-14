@@ -6,6 +6,8 @@ import { useParams, useRouter } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { ActionTooltip } from "@/components/action-tooltip";
 
+// Логика полоски которая слева от квадратика, если на выбранном севрере одна полоска, если наводишь на не выбранный другая, и так далее. А так же самого квадратика, то что в нём картинка, то что это кнопка и тд
+
 interface NavigationItemsProps {
 	id: string;
 	imageUrl: string;
@@ -16,6 +18,7 @@ export const NavigationItem = ({ id, imageUrl, name }: NavigationItemsProps) => 
 	const params = useParams();
 	const router = useRouter();
 
+	{/* при клике, перехд на нажатый сервер */}
   const onClick = () => {
     router.push(`/servers/${id}`)
   }

@@ -5,6 +5,8 @@ import { initialProfile } from "@/lib/initial-profile"
 import { NextResponse } from "next/server"
 import { InitialModal } from "@/components/modals/initial-modal"
 
+// Страница для поиска пользователя и сервера, и если не находит то создаёт новый сервер
+
 const SetupPage = async () => {
   const profile = await initialProfile()
 

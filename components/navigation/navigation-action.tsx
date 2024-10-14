@@ -4,12 +4,15 @@ import { Plus } from "lucide-react";
 import { ActionTooltip } from "@/components/action-tooltip";
 import { useModal } from "@/hooks/use-modal-store";
 
+// Кнопка для создания нового сервера
+
 export const NavigationAction = () => {
 	const { onOpen } = useModal();
 
 	return (
 		<div>
 			<ActionTooltip side="right" align="center" label="Add a server">
+				{/* подсказка в виде надписи при наведении */}
 				<button
 					onClick={() => onOpen("createServer")}
 					className="group flex items-center"

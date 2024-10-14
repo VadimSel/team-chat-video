@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Open_Sans } from "next/font/google";
-import { ruRU } from "@clerk/localizations";
+// import { ruRU } from "@clerk/localizations";
 
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -23,7 +23,8 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<ClerkProvider localization={ruRU}>
+		<ClerkProvider>
+		{/* <ClerkProvider localization={ruRU}> */}
 			{/* <RedirectToSignIn /> */}
 			<html lang="en" suppressHydrationWarning>
 				<body className={cn(font.className, "bg-white dark:bg-[#313338]")}>
@@ -42,3 +43,5 @@ export default function RootLayout({
 		</ClerkProvider>
 	);
 }
+
+// 4 11 42

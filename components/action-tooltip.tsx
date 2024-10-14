@@ -22,11 +22,11 @@ export const ActionTooltip = ({
 }: ActionaTooltipProps) => {
   return (
     <TooltipProvider>
-      <Tooltip delayDuration={50}>
+      <Tooltip delayDuration={50}> {/* Через какое время выскакивает подсказка */}
         <TooltipTrigger asChild>
           {children}
         </TooltipTrigger>
-        <TooltipContent side={side} align={align}>
+        <TooltipContent side={side} align={align}> {/* выбор расположения надписи внутри облака подсказки */}
           <p className="font-semibold text-sm capitalize">
             {label.toLowerCase()}
           </p>

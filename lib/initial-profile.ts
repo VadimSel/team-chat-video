@@ -1,17 +1,19 @@
-import { currentUser, redirectToSignIn } from "@clerk/nextjs/server";
+import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 
-import { db } from "./db"
+import { db } from "./db" // импорт структуры базы данных
+
+// Файл для загрузки и инициализации пользователя.
 
 export const initialProfile = async () => {
-  const user = await currentUser()
+  const user = await currentUser() // currentUser берётся из клерка (информация о логине пользователя)
 
   if (!user) {
     return redirectToSignIn()
   }
 
-  const profile = await db.profile.findUnique({
+  const profile = await db.profile.findUnique({ // profile который после db берётся из схемы призмы
     where: {
-      userId: user.id
+      userId: user.id // строке userId из призмы, мы присваиваем user из currentUser, а дальше через точку указываем что именно из user берём
     }
   })
 

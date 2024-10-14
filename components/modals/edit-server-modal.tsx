@@ -1,12 +1,10 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
-import { useForm } from "react-hook-form";
 import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
-import { FileUpload } from "@/components/file-upload";
-import { Button } from "@/components/ui/button";
 import {
 	Dialog,
 	DialogContent,
@@ -24,19 +22,23 @@ import {
 	FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { FileUpload } from "@/components/file-upload";
 import { useRouter } from "next/navigation";
 import { useModal } from "@/hooks/use-modal-store";
+import { useEffect } from "react";
 
 const formSchema = z.object({
 	name: z.string().min(1, { message: "Server name is required." }),
 	imageUrl: z.string().min(1, { message: "Server image is required." }),
 });
 
-export const CreateServerModal = () => {
-	const {isOpen, onClose, type} = useModal()
-  const router = useRouter()
+export const EditServerModal = () => {
+	const { isOpen, onClose, type, data } = useModal();
+	const router = useRouter();
 
-	const isModalOpen = isOpen && type === "createServer"
+	const isModalOpen = isOpen && type === "editServer";
+	const {server} = data
 
 	const form = useForm({
 		resolver: zodResolver(formSchema),
@@ -46,24 +48,31 @@ export const CreateServerModal = () => {
 		},
 	});
 
+	useEffect(() => {
+		if (server) {
+			form.setValue("name", server.name)
+			form.setValue("imageUrl", server.imageUrl)
+		}
+	}, [server, form])
+
 	const isLoading = form.formState.isSubmitting;
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      await axios.post("/api/servers", values)
+		try {
+			await axios.patch(`/api/servers/${server?.id}`, values);
 
-      form.reset()
-      router.refresh()
-    } catch (error) {
-      console.log(error)
-    }
-		console.log(values);
+			form.reset();
+			router.refresh();
+			onClose()
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	const handleClose = () => {
-		form.reset()
-		onClose()
-	}
+		form.reset();
+		onClose();
+	};
 
 	return (
 		<Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -87,11 +96,11 @@ export const CreateServerModal = () => {
 									render={({ field }) => (
 										<FormItem>
 											<FormControl>
-												<FileUpload 
-                        endpoint="serverImage"
-                        value={field.value}
-                        onChange={field.onChange}
-                        />
+												<FileUpload
+													endpoint="serverImage"
+													value={field.value}
+													onChange={field.onChange}
+												/>
 											</FormControl>
 										</FormItem>
 									)}
@@ -123,7 +132,7 @@ export const CreateServerModal = () => {
 						</div>
 						<DialogFooter className="bg-gray-100 px-6 py-4">
 							<Button variant={"primary"} disabled={isLoading}>
-								Create
+								Save
 							</Button>
 						</DialogFooter>
 					</form>

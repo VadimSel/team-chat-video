@@ -33,7 +33,7 @@ const formSchema = z.object({
 });
 
 export const InitialModal = () => {
-	const [isMounted, setIsMounted] = useState(false);
+	const [isMounted, setIsMounted] = useState(false); // Для отсутствии ошибки гидрации
 
   const router = useRouter()
 
@@ -49,7 +49,7 @@ export const InitialModal = () => {
 		},
 	});
 
-	const isLoading = form.formState.isSubmitting;
+	const isLoading = form.formState.isSubmitting; // formState берётся из form, который в свою очередь является свойством useForm, и isSubmitting это так же свойство которое содержится статус того, что сейчас отправляется форма или нет
 
 	const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
@@ -64,7 +64,7 @@ export const InitialModal = () => {
 		console.log(values);
 	};
 
-	if (!isMounted) {
+	if (!isMounted) { // Для отсутствии ошибки гидрации
 		return null;
 	}
 
@@ -91,7 +91,7 @@ export const InitialModal = () => {
 										<FormItem>
 											<FormControl>
 												<FileUpload 
-                        endpoint="serverImage"
+                        endpoint="serverImage" // Берётся из файла core.ts, где прописан максимальны размер файла, количество загружаемых файлов, и прочее необходимое для логики
                         value={field.value}
                         onChange={field.onChange}
                         />
@@ -119,7 +119,7 @@ export const InitialModal = () => {
 												{...field}
 											/>
 										</FormControl>
-										<FormMessage />
+										<FormMessage /> {/* Отображает сообщение, которое находится внутри formChema при невалидности */}
 									</FormItem>
 								)}
 							/>

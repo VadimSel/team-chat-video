@@ -9,6 +9,8 @@ import { ModeToggle } from "@/components/mode-toogle";
 import { UserButton } from "@clerk/nextjs";
 import { NavigationItem } from "./navigation-item";
 
+// Боковая полоска с отображением всех серверов для пользователя, кнопки для создания сервера, а так же нижние кнопки в виде аккаунта и переключения темы
+
 export const NavigationSidebar = async () => {
 	const profile = await currentProfile();
 
@@ -28,8 +30,8 @@ export const NavigationSidebar = async () => {
 
 	return (
 		<div className="space-y-4 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3">
-			<NavigationAction />
-			<Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" />
+			<NavigationAction /> {/* Кнопка для создания нового сервера */}
+			<Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-10 mx-auto" /> {/* маленькая полоска под кнопкой создания сервера */}
 			<ScrollArea className="flex-1 w-full">
 				{servers.map((server) => (
 					<div key={server.id} className="mb-4">
