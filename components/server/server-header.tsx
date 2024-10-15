@@ -20,6 +20,8 @@ import {
 } from "lucide-react";
 import { useModal } from "@/hooks/use-modal-store";
 
+// Это файл кнопки со стрелкой которая открывает приглашение на сервер, настройки сервера, удаление сервера и тд
+
 interface ServerHeaderProps {
 	server: ServerWithMembersWithProfiles; // Если прописать Server напрямую из призмы, то будут ошибки при попытке дотянутся до чего либо через точку
 	role?: MemberRole;

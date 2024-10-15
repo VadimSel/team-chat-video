@@ -4,6 +4,7 @@ import { redirect } from "next/navigation"
 import { db } from "@/lib/db"
 import { currentProfile } from "@/lib/current-profile"
 
+// Страница при присоединении к серверу
 
 interface inviteCodePageProps {
   params: {
@@ -22,7 +23,7 @@ const inviteCodePage = async ({params}: inviteCodePageProps) => {
     return redirect("/")
   }
 
-  const existingServer = await db.server.findFirst({
+  const existingServer = await db.server.findFirst({ // Проверка есть ли пользовател уже на этом сервере
     where: {
       inviteCode: params.inviteCode,
       members: {
@@ -34,10 +35,10 @@ const inviteCodePage = async ({params}: inviteCodePageProps) => {
   })
 
   if (existingServer) {
-    return redirect(`/servers/${existingServer.id}`)
+    return redirect(`/servers/${existingServer.id}`) // Если пользователь есть на это сервере то перенаправляем на этот сервер
   }
 
-  const server = await db.server.update({
+  const server = await db.server.update({ // Логика при присоединении к новому серверу
     where: {
       inviteCode: params.inviteCode
     },
