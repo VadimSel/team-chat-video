@@ -106,7 +106,7 @@ export const InitialModal = () => {
 								name="name"
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel className="upparcase text-xs font-bold text-zinc-500 dark:text-secondary/70">
+										<FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
 											Server name
 										</FormLabel>
 										<FormControl>
