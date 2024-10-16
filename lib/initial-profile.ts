@@ -1,6 +1,6 @@
 import { currentUser, redirectToSignIn } from "@clerk/nextjs";
 
-import { db } from "./db" // импорт структуры базы данных
+import { db } from "@/lib/db" // импорт структуры базы данных
 
 // Файл для загрузки и инициализации пользователя.
 
