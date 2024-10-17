@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useModal } from "@/hooks/use-modal-store";
 
 // Компонент отображения сообщения (то как будет выглядеть каждое сообщение) (удаление и редактирование сообщений)
 
@@ -67,7 +68,7 @@ export const ChatItem = ({
   socketQuery
 }: ChatItemProps) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { onOpen } = useModal()
 
   useEffect(() => {
     const handleKeyDown = (event: any) => {
@@ -239,6 +240,10 @@ export const ChatItem = ({
           )}
           <ActionTooltip label="Delete">
             <Trash
+            onClick={() => onOpen("deleteMessage", {
+              apiUrl: `${socketUrl}/${id}`,
+              query: socketQuery
+            })}
               className="cursor-pointer ml-auto w-4 h-4 text-zinc-500
               hover:text-zinc-600 dark:hover:text-zinc300 transition"
             />
