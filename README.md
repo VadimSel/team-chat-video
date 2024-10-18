@@ -6,3 +6,5 @@
 - Prisma + PostgreSQL
 - Uploadthing
 - Zustand
+- Livekit
+- Zod
